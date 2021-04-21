@@ -1,5 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
+import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
+import Dashboard from '../views/Dashboard.vue'
+import About from '../views/About.vue'
 
 const routes = [
   {
@@ -8,13 +12,47 @@ const routes = [
     component: Home
   },
   {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard,
+    beforeEnter(to, from, next) {
+      if (localStorage.getItem("authToken")) {
+        next()
+      } else {
+        next({
+          name: "Login",
+          query: { redirectPath: to.fullPath }
+        })
+      }
+    }
+  },
+  {
+    path: '/logout',
+    name: 'Logout',
+    beforeEnter(to, from, next) {
+      localStorage.removeItem("authToken")
+      alert("Logout Successful")
+      next({
+        name: "Login"
+      })
+    }
+  },
+  {
     path: '/about',
     name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: About
   }
+  
 ]
 
 const router = createRouter({
