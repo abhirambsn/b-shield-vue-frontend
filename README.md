@@ -1,4 +1,10 @@
-# frontend
+# B-Shield Password Manager (Self Hosted)
+
+## Use with B-Shield Password Manager Backend (API)
+
+```
+Frontend Made using Vue.js
+```
 
 ## Project setup
 ```
