@@ -14,5 +14,8 @@ export default {
   components: {
     Footer,
   },
+  created() {
+    document.title = "B-Shield Password Manager"
+  }
 };
 </script>
